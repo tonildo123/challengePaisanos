@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Image, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import { Enviroment } from './enviroment/Enviroment';
+import { Enviroment } from '../enviroment/Enviroment';
 import axios from 'axios';
-
+import { useDispatch } from 'react-redux';
+import { loggearme } from '../store/redux/reduxLogin/LoginSlice';
 
 const Login = ({ navigation }) => {
 
-
+    const distpach = useDispatch()
     const [email, setEmail] = useState('soypaisanx@paisanos.io');
     const [password, setPassword] = useState('PAISANX2023!$');
     const [toggleCheckBox, setToggleCheckBox] = useState(true)
@@ -25,12 +26,22 @@ const Login = ({ navigation }) => {
 
         ).then(
             (res) => {
-                console.log('respuesta ok2', JSON.stringify(res, null, 4))
-                navigation.navigate('Home', { res })
+                const datos = res.data
+
+                if (res.data.success = true) {
+                    console.log('respuesta ok2', JSON.stringify(datos, null, 4))
+                    let obj = {
+                        name: res.data.data.name,                        
+                    }
+
+                    distpach(loggearme(obj))
+                }
+
+
             }
         ).catch(
             (error) => {
-                console.log('respuesta 2 no ok', JSON.stringify(error, null, 4))
+                console.log('respuesta 2 no ok', error)
                 Alert.alert('error')
             }
         )
@@ -48,7 +59,7 @@ const Login = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.containerlogin}>
                 <Image
-                    source={require('./assets/logo.png')}
+                    source={require('../assets/logo.png')}
                     style={{
 
                         height: 100,
