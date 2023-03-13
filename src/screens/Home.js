@@ -7,9 +7,8 @@ import {
     ScrollView,
     TouchableOpacity,
 } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
-
     Card,
     Title,
     Paragraph,
@@ -18,13 +17,20 @@ import {
 } from 'react-native-paper';
 import { Enviroment } from '../enviroment/Enviroment';
 import axios from 'axios';
+import Feather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useSelector } from 'react-redux';
+import { PaymentIcon } from 'react-native-payment-icons'
+import moment from 'moment';
 
 const Home = () => {
+    let state = useSelector((state) => state)
+
+    const [cuentas, setCuentas] = useState();
+    console.log('cuentas', JSON.stringify(cuentas, null, 4))
 
     useEffect(() => {
-
         consultarTarjetas()
-
     }, [])
 
     const consultarTarjetas = () => {
@@ -35,6 +41,7 @@ const Home = () => {
         ).then(
             (res) => {
                 console.log('respuesta ok2', JSON.stringify(res.data.data, null, 4))
+                setCuentas(res.data.data)
             }
         ).catch(
             (error) => {
@@ -47,20 +54,166 @@ const Home = () => {
 
     return (
         <View>
-            <View>{/**View de el header */}
+            <View style={{ backgroundColor: 'white' }}>{/**View de el header */}
                 <Appbar.Header
                     style={{ backgroundColor: 'white', alignSelf: 'center' }}>
-                    <Appbar.Content title="Hola" />
-                    <View
-                        style={{ marginRight: 15, flexDirection: 'row' }}
-                    >
-
+                    <View style={{ flexDirection: 'row', padding: 15 }}>
+                        <View style={{ width: '80%' }}>
+                            <Text
+                                style={{
+                                    color: "#200E32",
+                                    fontSize: 22,
+                                    // fontFamily: 'bold',                                
+                                }}
+                            >Hola</Text>
+                            <Text
+                                style={{
+                                    color: "#200E32",
+                                    fontSize: 22,
+                                    fontFamily: 'bold',
+                                    fontWeight: 'bold'
+                                }}
+                            >{state.logger.user.name}</Text>
+                        </View>
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                width: '20%',
+                                alignItems: 'center'
+                            }}>
+                            <Ionicons
+                                name="notifications-outline"
+                                color="#200E32"
+                                size={22}
+                                style={{
+                                    marginHorizontal: 8
+                                }}
+                                onPress={() => console.log('hola icon')}
+                            />
+                            <Feather
+                                name="search"
+                                color="#200E32"
+                                size={22}
+                                style={{
+                                    marginHorizontal: 8
+                                }}
+                                onPress={() => console.log('hola icon')}
+                            />
+                        </View>
                     </View>
                 </Appbar.Header>
                 <StatusBar backgroundColor="#000000" barStyle="light-content" />
             </View>
+            {cuentas == undefined ? (
+                <View
+                    style={{
+                        flex: 0.3,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: 'white',
+                    }}>
+                    <ActivityIndicator size="large" color="red" />
+                </View>
+            ) : (<View>
+                <SafeAreaView>
+                    <ScrollView horizontal={true}>
+                        {cuentas.map((item, id) => (
+                            <View
+                                key={id}
+                                style={{
+                                    height: 190,
+                                    width: 318,
+                                    backgroundColor: `${item.issuer == "visa" ? "#F9B7B7" : "#005CEE"}`,
+                                    borderRadius: 18,
+                                    marginLeft: 24,
+                                    padding: 10
+                                }}>
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                        height: '30%',
+                                    }}>
+                                    <Text
+                                        style={{
+                                            color: 'white',
+                                            fontSize: 18,
+                                            fontFamily: 'bold',
+                                            width: '75%',
+                                        }}
+                                    >Balance</Text>
+                                    <PaymentIcon
+                                        type={item.issuer}
+                                        width={50}
+                                    />
+                                </View>
+                                <View
+                                    style={{ height: '20%', flexDirection: 'row', }}>
+                                    <Text
+                                        style={{
+                                            color: 'white',
+                                            fontSize: 18,
+                                            fontFamily: 'bold',
+                                            alignSelf: 'flex-start',
+                                            padding: 3,
+                                            backgroundColor: '#89A5FB',
+                                            borderRadius: 4
+                                        }}
+                                    >{item.currency}</Text>
+                                    <Text
+                                        style={{
+                                            color: 'white',
+                                            fontSize: 18,
+                                            fontFamily: 'bold',
+                                            alignSelf: 'flex-start',
+                                            marginLeft: 3
+                                        }}
+                                    >{item.balance}</Text>
+                                </View>
+                                <View
+                                    style={{ height: '33%', justifyContent: 'center' }}>
+                                    <Text
+                                        style={{
+                                            color: 'white',
+                                            fontSize: 22,
+                                            fontFamily: 'bold',
+                                            alignSelf: 'flex-start',
+                                        }}
+                                    >**** **** **** 1234</Text>
+                                </View>
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                        height: '20%',
+                                        justifyContent: 'center',
+                                        // marginBottom:10
+                                    }}>
+                                    <Text
+                                        style={{
+                                            color: 'white',
+                                            fontSize: 16,
+                                            fontFamily: 'bold',
+                                            alignSelf: 'flex-start',
+                                            width: '75%',
+                                        }}
+                                    >{item.name}</Text>
+                                    <Text
+                                        style={{
+                                            width: '25%',
+                                            color: 'white',
+                                            fontSize: 14,
+                                            fontFamily: 'bold',
+                                            alignSelf: 'flex-end',
+                                        }}
+                                    >Exp.date {moment(item.expDate).format('MM/DD')}</Text>
+                                </View>
+                            </View>
+                        ))}
+                    </ScrollView>
+                </SafeAreaView>
+            </View>
+            )}
 
-            <Text>Home</Text>
+
         </View>
     )
 }

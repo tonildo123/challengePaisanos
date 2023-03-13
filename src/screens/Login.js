@@ -42,7 +42,7 @@ const Login = ({ navigation }) => {
         ).catch(
             (error) => {
                 console.log('respuesta 2 no ok', error)
-                Alert.alert('error')
+                
             }
         )
     }
