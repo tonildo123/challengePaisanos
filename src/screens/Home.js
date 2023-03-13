@@ -57,7 +57,9 @@ const Home = () => {
         <View>
             <View style={{ backgroundColor: 'white' }}>{/**View de el header */}
                 <Appbar.Header
-                    style={{ backgroundColor: 'white', alignSelf: 'center' }}>
+                    style={{ backgroundColor: 'white',
+                     alignSelf: 'center',
+                      marginVertical:15 }}>
                     <View style={{ flexDirection: 'row', padding: 15 }}>
                         <View style={{ width: '80%' }}>
                             <Text
@@ -218,7 +220,7 @@ const Home = () => {
                 <Text
                     style={{
                         fontSize: 22,
-                        padding: 8,
+                        padding: 10,
                         color: 'black',
                         fontFamily: 'bold',
 
@@ -317,7 +319,7 @@ const Home = () => {
                 <Text
                 style={{
                     fontSize: 22,
-                    padding: 8,
+                    padding: 10,
                     color: 'black',
                     fontFamily: 'bold',
                     marginTop:5
