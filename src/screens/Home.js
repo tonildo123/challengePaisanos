@@ -19,6 +19,7 @@ import { Enviroment } from '../enviroment/Enviroment';
 import axios from 'axios';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useSelector } from 'react-redux';
 import { PaymentIcon } from 'react-native-payment-icons'
 import moment from 'moment';
@@ -212,7 +213,121 @@ const Home = () => {
                 </SafeAreaView>
             </View>
             )}
+            {/* el body  */}
+            <View>
+                <Text
+                    style={{
+                        fontSize: 22,
+                        padding: 8,
+                        color: 'black',
+                        fontFamily: 'bold',
 
+                    }}
+                >Servicios</Text>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-evenly',
+                        alignItems: 'center'
+                    }}>
+                    <TouchableOpacity
+                        style={{
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <Ionicons
+                            name="wallet"
+                            color="#74CC9B"
+                            size={22}
+                            style={{
+                                marginHorizontal: 8,
+                                padding:16,
+                                backgroundColor:'#E4FFF0'
+                            }}
+                            onPress={() => console.log('hola icon')}
+                        />
+                        <Paragraph >
+                            Billetera
+                        </Paragraph>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <Ionicons
+                            name="swap-vertical"
+                            color="#EF9C55"
+                            size={22}
+                            style={{
+                                marginHorizontal: 8,
+                                padding:16,
+                                backgroundColor:'#FEEAD4'
+                            }}
+                            onPress={() => console.log('hola icon')}
+                        />
+                        <Paragraph >
+                            Transferir
+                        </Paragraph></TouchableOpacity>
+                    <TouchableOpacity
+                        style={{
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+
+                        <Ionicons
+                            name="document-text"
+                            color="#B946FF"
+                            size={22}
+                            style={{
+                                marginHorizontal: 8,
+                                padding:16,
+                                backgroundColor:'#EEE3FF'
+                            }}
+                            onPress={() => console.log('hola icon')}
+                        />
+                        <Paragraph >
+                            Pagar
+                        </Paragraph></TouchableOpacity>
+                    <TouchableOpacity
+                        style={{
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <MaterialCommunityIcons
+                            name="cellphone-arrow-down"
+                            color="#68C6E5"
+                            size={22}
+                            style={{
+                                marginHorizontal: 8,
+                                padding:16,
+                                backgroundColor:'#CAF0FF'
+                            }}
+                            onPress={() => console.log('hola icon')}
+                        />
+                        <Paragraph >
+                            Recargar
+                        </Paragraph>
+                    </TouchableOpacity>
+                </View>
+                <Text
+                style={{
+                    fontSize: 22,
+                    padding: 8,
+                    color: 'black',
+                    fontFamily: 'bold',
+                    marginTop:5
+
+                }}
+                >Útltimas Transacciones</Text>
+                <View>
+
+                </View>
+            </View>
 
         </View>
     )
