@@ -6,6 +6,7 @@ import {
     ActivityIndicator,
     ScrollView,
     TouchableOpacity,
+    FlatList
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import {
@@ -28,12 +29,34 @@ const Home = () => {
     let state = useSelector((state) => state)
 
     const [cuentas, setCuentas] = useState();
+    const [transacciones, setTransacciones] = useState();
     console.log('cuentas', JSON.stringify(cuentas, null, 4))
 
     useEffect(() => {
         consultarTarjetas()
+        consultarTransacciones()
     }, [])
 
+
+    const consultarTransacciones = () => {
+
+        axios.get(
+            `${Enviroment.BASE_URL}/${Enviroment.api_transactions}`,
+            { headers: { 'x-api-key': `${Enviroment.key}` }, }
+
+        ).then(
+            (res) => {
+                console.log('transacciones ok', JSON.stringify(res.data.data, null, 4))
+                setTransacciones(res.data.data)
+            }
+        ).catch(
+            (error) => {
+                console.log('transacciones no ok', JSON.stringify(error, null, 4))
+                Alert.alert('error')
+            }
+        )
+
+    }
     const consultarTarjetas = () => {
         axios.get(
             `${Enviroment.BASE_URL}/${Enviroment.api_cards}`,
@@ -51,15 +74,17 @@ const Home = () => {
             }
         )
     }
-
+    
 
     return (
         <View>
             <View style={{ backgroundColor: 'white' }}>{/**View de el header */}
                 <Appbar.Header
-                    style={{ backgroundColor: 'white',
-                     alignSelf: 'center',
-                      marginVertical:15 }}>
+                    style={{
+                        backgroundColor: 'white',
+                        alignSelf: 'center',
+                        marginVertical: 15
+                    }}>
                     <View style={{ flexDirection: 'row', padding: 15 }}>
                         <View style={{ width: '80%' }}>
                             <Text
@@ -244,8 +269,8 @@ const Home = () => {
                             size={22}
                             style={{
                                 marginHorizontal: 8,
-                                padding:16,
-                                backgroundColor:'#E4FFF0'
+                                padding: 16,
+                                backgroundColor: '#E4FFF0'
                             }}
                             onPress={() => console.log('hola icon')}
                         />
@@ -265,8 +290,8 @@ const Home = () => {
                             size={22}
                             style={{
                                 marginHorizontal: 8,
-                                padding:16,
-                                backgroundColor:'#FEEAD4'
+                                padding: 16,
+                                backgroundColor: '#FEEAD4'
                             }}
                             onPress={() => console.log('hola icon')}
                         />
@@ -286,8 +311,8 @@ const Home = () => {
                             size={22}
                             style={{
                                 marginHorizontal: 8,
-                                padding:16,
-                                backgroundColor:'#EEE3FF'
+                                padding: 16,
+                                backgroundColor: '#EEE3FF'
                             }}
                             onPress={() => console.log('hola icon')}
                         />
@@ -306,8 +331,8 @@ const Home = () => {
                             size={22}
                             style={{
                                 marginHorizontal: 8,
-                                padding:16,
-                                backgroundColor:'#CAF0FF'
+                                padding: 16,
+                                backgroundColor: '#CAF0FF'
                             }}
                             onPress={() => console.log('hola icon')}
                         />
@@ -317,16 +342,78 @@ const Home = () => {
                     </TouchableOpacity>
                 </View>
                 <Text
-                style={{
-                    fontSize: 22,
-                    padding: 10,
-                    color: 'black',
-                    fontFamily: 'bold',
-                    marginTop:5
+                    style={{
+                        fontSize: 22,
+                        padding: 10,
+                        color: 'black',
+                        fontFamily: 'bold',
+                        marginTop: 5
 
-                }}
+                    }}
                 >Útltimas Transacciones</Text>
                 <View>
+
+                    {
+                        transacciones == undefined
+                            ? <View
+                                style={{
+                                    flex: 0.3,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    backgroundColor: 'white',
+                                }}>
+                                <ActivityIndicator size="large" color="red" />
+                            </View>
+                            :
+                            <View>
+                                <SafeAreaView>
+                                    <ScrollView  contentContainerStyle={{ flexGrow: 1 }}>
+                                    {transacciones.map((item, id) => (
+                                        <View
+                                        key={id}
+                                        style={{ flexDirection: 'row', padding: 15 }}
+                                        ><Ionicons
+                                            name="wallet"
+                                            color="#74CC9B"
+                                            size={22}
+                                            style={{
+                                                marginHorizontal: 8,
+                                                padding: 16,
+                                                backgroundColor: '#E4FFF0'
+                                            }}
+                                            onPress={() => console.log('hola icon')}
+                                        />
+                                        <View
+                                            style={{ width: '60%', paddingLeft: 8 }}
+                                        >
+                                            <Text
+                                                style={{
+                                                    color: 'black',
+                                                    fontSize: 18,
+                                                    fontFamily: 'bold',
+                                                    alignSelf: 'flex-start',
+                                                    padding: 3,
+                                                }}
+                                            >{item.title}</Text>
+                                            <Text
+                                                style={{
+                                                    color: 'grey',
+                                                    fontSize: 12,
+                                                    fontFamily: 'bold',
+                                                    alignSelf: 'flex-start',
+                                                    padding: 3,
+                                                }}
+                                            >{item.transactionType}</Text>
+                                        </View>
+                                        <Text>$ {item.amount}</Text>
+                
+                                    </View>
+                                    ))}
+
+                                    </ScrollView>
+                                </SafeAreaView>
+                            </View>
+                    }
 
                 </View>
             </View>

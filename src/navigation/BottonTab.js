@@ -17,11 +17,13 @@ export const BottonTab = () => {
                 name="Home"
                 component={Home}
                 options={{
+                    tabBarLabel: "", 
+                    tabBarStyle: { height: 60 },
                     tabBarIcon: ({focused}) => (
                         <AntDesign
                             name="home"
                             color={focused ? '#6C8FF8':'#200E32'}
-                            size={20}
+                            size={30}
                             style={{
                                 marginHorizontal: 8
                             }}
@@ -31,13 +33,15 @@ export const BottonTab = () => {
                 }} />
             <Tab.Screen
                 name="Contactos"
+                
                 component={Contacts}
                 options={{
+                    tabBarLabel: "", 
                     tabBarIcon: ({focused}) => (
                         <Octicons
                             name="note"
                             color={focused ? '#6C8FF8':'#200E32'}
-                            size={20}
+                            size={30}
                             style={{
                                 marginHorizontal: 8
                             }}
@@ -49,13 +53,15 @@ export const BottonTab = () => {
                 name="Salir"
                 component={()=>null}
                 options={{
+                    tabBarLabel: "", 
                     tabBarIcon: ({focused}) => (
                         <Ionicons
                             name="log-out-outline"
                             color={focused ? '#6C8FF8':'#200E32'}
-                            size={20}
+                            size={30}
                             style={{
-                                marginHorizontal: 8
+                                marginHorizontal: 8,
+                                padding: 8,
                             }}
                             onPress={()=>console.log('hola icon')}
                         />
