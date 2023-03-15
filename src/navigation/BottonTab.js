@@ -5,11 +5,15 @@ import Contacts from '../screens/Contacts';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Octicons from 'react-native-vector-icons/Octicons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import { useDispatch } from 'react-redux';
+import { unlogger } from '../store/redux/reduxLogin/LoginSlice';
 
 const Tab = createBottomTabNavigator();
 
 export const BottonTab = () => {
+
+    const distpach = useDispatch()
+
     return (
 
         <Tab.Navigator screenOptions={{ headerShown: false }}>
@@ -27,7 +31,7 @@ export const BottonTab = () => {
                             style={{
                                 marginHorizontal: 8
                             }}
-                            onPress={()=>console.log('hola icon')}
+                            // onPress={()=>console.log('hola icon')}
                         />
                     ),
                 }} />
@@ -45,7 +49,7 @@ export const BottonTab = () => {
                             style={{
                                 marginHorizontal: 8
                             }}
-                            onPress={()=>console.log('hola icon')}
+                            // onPress={()=>console.log('hola icon')}
                         />
                     ),
                 }} />
@@ -63,7 +67,7 @@ export const BottonTab = () => {
                                 marginHorizontal: 8,
                                 padding: 8,
                             }}
-                            onPress={()=>console.log('hola icon')}
+                            onPress={()=>{distpach(unlogger())}}
                         />
                     ),
                 }} />

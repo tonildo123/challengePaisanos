@@ -74,7 +74,6 @@ const Home = () => {
             }
         )
     }
-    
 
     return (
         <View>
@@ -365,54 +364,50 @@ const Home = () => {
                                 <ActivityIndicator size="large" color="red" />
                             </View>
                             :
-                            <View>
-                                <SafeAreaView>
-                                    <ScrollView  contentContainerStyle={{ flexGrow: 1 }}>
+                            <SafeAreaView>
+                                <ScrollView>
                                     {transacciones.map((item, id) => (
-                                        <View
-                                        key={id}
-                                        style={{ flexDirection: 'row', padding: 15 }}
-                                        ><Ionicons
-                                            name="wallet"
-                                            color="#74CC9B"
-                                            size={22}
-                                            style={{
-                                                marginHorizontal: 8,
-                                                padding: 16,
-                                                backgroundColor: '#E4FFF0'
-                                            }}
-                                            onPress={() => console.log('hola icon')}
-                                        />
-                                        <View
-                                            style={{ width: '60%', paddingLeft: 8 }}
-                                        >
-                                            <Text
-                                                style={{
-                                                    color: 'black',
-                                                    fontSize: 18,
-                                                    fontFamily: 'bold',
-                                                    alignSelf: 'flex-start',
-                                                    padding: 3,
-                                                }}
-                                            >{item.title}</Text>
-                                            <Text
-                                                style={{
-                                                    color: 'grey',
-                                                    fontSize: 12,
-                                                    fontFamily: 'bold',
-                                                    alignSelf: 'flex-start',
-                                                    padding: 3,
-                                                }}
-                                            >{item.transactionType}</Text>
-                                        </View>
-                                        <Text>$ {item.amount}</Text>
-                
-                                    </View>
-                                    ))}
 
-                                    </ScrollView>
-                                </SafeAreaView>
-                            </View>
+                                        <View
+                                            key={id}
+                                            style={{ flexDirection: 'row', padding: 15 }}
+                                        ><Ionicons
+                                                name="wallet"
+                                                color="#74CC9B"
+                                                size={22}
+                                                style={{
+                                                    marginHorizontal: 8,
+                                                    padding: 16,
+                                                    backgroundColor: '#E4FFF0'
+                                                }}
+                                                onPress={() => console.log('hola icon')}
+                                            />
+                                            <View style={{ width: '60%', paddingLeft: 8 }}>
+                                                <Text
+                                                    style={{
+                                                        color: 'black',
+                                                        fontSize: 18,
+                                                        fontFamily: 'bold',
+                                                        alignSelf: 'flex-start',
+                                                        padding: 3,
+                                                    }}
+                                                >{item.title}</Text>
+                                                <Text
+                                                    style={{
+                                                        color: 'grey',
+                                                        fontSize: 12,
+                                                        fontFamily: 'bold',
+                                                        alignSelf: 'flex-start',
+                                                        padding: 3,
+                                                    }}
+                                                >{item.transactionType}</Text>
+                                            </View>
+                                            <Text>$ {item.amount}</Text>
+                                        </View>
+
+                                    ))}
+                                </ScrollView>
+                            </SafeAreaView>
                     }
 
                 </View>
