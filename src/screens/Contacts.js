@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   SectionList,
   StatusBar,
-  ActivityIndicator
+  ActivityIndicator,
+  TextInput
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {
@@ -20,7 +21,7 @@ import {
 } from 'react-native-paper';
 import { Enviroment } from '../enviroment/Enviroment';
 
-const Contacts = ({navigation}) => {
+const Contacts = ({ navigation }) => {
 
   const [constactos, setconstactos] = useState()
 
@@ -69,42 +70,76 @@ const Contacts = ({navigation}) => {
   return (
 
     <View style={{
-      flex: 1
+      flex: 1,
+      backgroundColor: '#F8F9F9'
     }}>
       <View style={{ backgroundColor: 'white' }}>{/**View de el header */}
         <Appbar.Header
           style={{
             backgroundColor: 'white',
-            // alignSelf: 'center',
-            
           }}>
-          <View style={{ flexDirection: 'row',  }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
             <AntDesign
               name="left"
               color="#200E32"
               size={22}
               style={{
-                marginHorizontal: 8
+                marginHorizontal: 18
               }}
-              onPress={() => {navigation.navigate('Home')}}
+              onPress={() => { navigation.navigate('Home') }}
             />
             <Text
               style={{
-                color: "#200E32",
+                color: "#334154",
                 fontSize: 22,
-                fontFamily: 'bold',
+                // fontFamily: 'bold',
                 fontWeight: 'bold'
               }}
             >Contactos</Text>
           </View>
-
         </Appbar.Header>
         <StatusBar backgroundColor="#000000" barStyle="light-content" />
       </View>
-      <Text>Contactos header</Text>
-      <Text>Buscador</Text>
-      <Text>Recents</Text>
+       <View
+       style={{
+        flexDirection:'row',
+        backgroundColor: 'white',
+        margin: 10,
+        borderRadius: 13,
+        borderWidth: 1,
+        borderColor: '#EAEDED',
+        padding: 10,
+        alignItems: 'center'
+      }}
+       >
+        <AntDesign
+          name="search1"
+          color="#AAAAAA"
+          size={22}
+          style={{
+            paddingHorizontal: 5,
+          }}
+          onPress={() => { console.log('buscar') }}
+        />
+
+       <TextInput
+        placeholder="Ingrese un nombre o un numero"
+        placeholderTextColor="#AAAAAA"
+        >
+        
+      </TextInput>
+        </View>       
+      
+      <Text
+      style={{
+        color:'#AAAAAA',
+        padding:10,
+        fontSize:18
+
+
+      }}
+      >Recents</Text>
       {
         constactos == undefined
           ? <View
@@ -129,7 +164,9 @@ const Contacts = ({navigation}) => {
                   <Text style={{
                     marginHorizontal: 8,
                     padding: 16,
-                    backgroundColor: '#E4FFF0'
+                    backgroundColor: '#CAF0FF',
+                    color:'#68C6E5',
+                    borderRadius:14
                   }}>{item.name.charAt(0).toUpperCase()} {item.lastName.charAt(0).toUpperCase()}</Text>
                   <View
                     style={{ width: '70%', paddingLeft: 8 }}
@@ -140,9 +177,9 @@ const Contacts = ({navigation}) => {
 
                 </View>
               )}
-              renderSectionHeader={({ section: { title } }) => (
-                <Text style={{ color: 'black' }}>{title}</Text>
-              )}
+              // renderSectionHeader={({ section: { title } }) => (
+              //   <Text style={{ color: 'black' }}>{title}</Text>
+              // )} esto mostraba la letra de los contactos
             />
 
           </SafeAreaView>
