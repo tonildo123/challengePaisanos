@@ -41,6 +41,7 @@ export const BottonTab = () => {
                 component={Contacts}
                 options={{
                     tabBarLabel: "", 
+                    tabBarStyle: { height: 60 },
                     tabBarIcon: ({focused}) => (
                         <Octicons
                             name="note"
@@ -58,6 +59,7 @@ export const BottonTab = () => {
                 component={()=>null}
                 options={{
                     tabBarLabel: "", 
+                    tabBarStyle: { height: 60 },
                     tabBarIcon: ({focused}) => (
                         <Ionicons
                             name="log-out-outline"

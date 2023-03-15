@@ -9,9 +9,18 @@ import {
   StatusBar,
   ActivityIndicator
 } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import {
+  Card,
+  Title,
+  Paragraph,
+  useTheme,
+  Appbar,
+  Divider
+} from 'react-native-paper';
 import { Enviroment } from '../enviroment/Enviroment';
 
-const Contacts = () => {
+const Contacts = ({navigation}) => {
 
   const [constactos, setconstactos] = useState()
 
@@ -61,8 +70,38 @@ const Contacts = () => {
 
     <View style={{
       flex: 1
-
     }}>
+      <View style={{ backgroundColor: 'white' }}>{/**View de el header */}
+        <Appbar.Header
+          style={{
+            backgroundColor: 'white',
+            // alignSelf: 'center',
+            
+          }}>
+          <View style={{ flexDirection: 'row',  }}>
+
+            <AntDesign
+              name="left"
+              color="#200E32"
+              size={22}
+              style={{
+                marginHorizontal: 8
+              }}
+              onPress={() => {navigation.navigate('Home')}}
+            />
+            <Text
+              style={{
+                color: "#200E32",
+                fontSize: 22,
+                fontFamily: 'bold',
+                fontWeight: 'bold'
+              }}
+            >Contactos</Text>
+          </View>
+
+        </Appbar.Header>
+        <StatusBar backgroundColor="#000000" barStyle="light-content" />
+      </View>
       <Text>Contactos header</Text>
       <Text>Buscador</Text>
       <Text>Recents</Text>
@@ -93,12 +132,12 @@ const Contacts = () => {
                     backgroundColor: '#E4FFF0'
                   }}>{item.name.charAt(0).toUpperCase()} {item.lastName.charAt(0).toUpperCase()}</Text>
                   <View
-                  style={{ width: '70%', paddingLeft: 8 }}
+                    style={{ width: '70%', paddingLeft: 8 }}
                   >
-                  <Text style={{ color: 'black' }}>{item.name} {item.lastName}</Text>
-                  <Text style={{ color: 'black' }}>{item.phone}</Text>
+                    <Text style={{ color: 'black' }}>{item.name} {item.lastName}</Text>
+                    <Text style={{ color: 'black' }}>{item.phone}</Text>
                   </View>
-                  
+
                 </View>
               )}
               renderSectionHeader={({ section: { title } }) => (

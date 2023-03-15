@@ -15,6 +15,7 @@ import {
     Paragraph,
     useTheme,
     Appbar,
+    Divider
 } from 'react-native-paper';
 import { Enviroment } from '../enviroment/Enviroment';
 import axios from 'axios';
@@ -141,7 +142,7 @@ const Home = () => {
                     }}>
                     <ActivityIndicator size="large" color="red" />
                 </View>
-            ) : (<View>
+            ) :
                 <SafeAreaView>
                     <ScrollView horizontal={true}>
                         {cuentas.map((item, id) => (
@@ -237,8 +238,7 @@ const Home = () => {
                         ))}
                     </ScrollView>
                 </SafeAreaView>
-            </View>
-            )}
+            }
             {/* el body  */}
             <View>
                 <Text
@@ -340,6 +340,7 @@ const Home = () => {
                         </Paragraph>
                     </TouchableOpacity>
                 </View>
+                <Divider style={{ marginTop: 10, marginBottom: 10 }} />
                 <Text
                     style={{
                         fontSize: 22,
@@ -350,22 +351,23 @@ const Home = () => {
 
                     }}
                 >Útltimas Transacciones</Text>
-                <View>
+                <SafeAreaView>
+                    <ScrollView>
 
-                    {
-                        transacciones == undefined
-                            ? <View
-                                style={{
-                                    flex: 0.3,
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    backgroundColor: 'white',
-                                }}>
-                                <ActivityIndicator size="large" color="red" />
-                            </View>
-                            :
-                            <SafeAreaView>
-                                <ScrollView>
+                        {
+                            transacciones == undefined
+                                ? <View
+                                    style={{
+                                        flex: 0.3,
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        backgroundColor: 'white',
+                                    }}>
+                                    <ActivityIndicator size="large" color="red" />
+                                </View>
+                                :
+
+                                <View>
                                     {transacciones.map((item, id) => (
 
                                         <View
@@ -406,11 +408,10 @@ const Home = () => {
                                         </View>
 
                                     ))}
-                                </ScrollView>
-                            </SafeAreaView>
-                    }
-
-                </View>
+                                </View>
+                        }
+                    </ScrollView>
+                </SafeAreaView>
             </View>
 
         </View>
