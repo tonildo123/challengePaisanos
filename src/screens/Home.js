@@ -351,28 +351,32 @@ const Home = () => {
 
                     }}
                 >Útltimas Transacciones</Text>
-                <SafeAreaView>
-                    <ScrollView>
 
-                        {
-                            transacciones == undefined
-                                ? <View
-                                    style={{
-                                        flex: 0.3,
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        backgroundColor: 'white',
-                                    }}>
-                                    <ActivityIndicator size="large" color="red" />
-                                </View>
-                                :
 
-                                <View>
+                {
+                    transacciones == undefined
+                        ? (
+                            <View
+                                style={{
+                                    flex: 1,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    backgroundColor: 'white',
+                                }}>
+                                <ActivityIndicator size="large" color="red" />
+                            </View>
+                        )
+                        : (
+                            <View>
+                                <ScrollView>
                                     {transacciones.map((item, id) => (
 
                                         <View
                                             key={id}
-                                            style={{ flexDirection: 'row', padding: 15 }}
+                                            style={{
+                                                flexDirection: 'row',
+                                                padding: 15
+                                            }}
                                         ><Ionicons
                                                 name="wallet"
                                                 color="#74CC9B"
@@ -406,14 +410,11 @@ const Home = () => {
                                             </View>
                                             <Text>$ {item.amount}</Text>
                                         </View>
-
                                     ))}
-                                </View>
-                        }
-                    </ScrollView>
-                </SafeAreaView>
+                                </ScrollView>
+                            </View>)
+                }
             </View>
-
         </View>
     )
 }

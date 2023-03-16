@@ -24,6 +24,7 @@ import { Enviroment } from '../enviroment/Enviroment';
 const Contacts = ({ navigation }) => {
 
   const [constactos, setconstactos] = useState()
+  const [constactosfilter, setconstactosfilter] = useState()
 
   useEffect(() => {
     consultarContactos()
@@ -56,6 +57,14 @@ const Contacts = ({ navigation }) => {
         const sections = Object.values(transformedData);
         setconstactos(sections)
         console.log('datos : ', JSON.stringify(sections, null, 4))
+        
+        const filteredArray = sections.slice(0, 2).filter((item, index) => {
+          return index < 2;
+        });
+        
+        console.log(JSON.stringify(filteredArray, null, 4));
+
+        setconstactosfilter(filteredArray)
       }
     ).catch(
       (error) => {
@@ -136,10 +145,67 @@ const Contacts = ({ navigation }) => {
         color:'#AAAAAA',
         padding:10,
         fontSize:18
-
-
       }}
       >Recents</Text>
+       {
+        constactosfilter == undefined
+          ? <View
+            style={{
+              flex: 0.3,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: 'white',
+            }}>
+            <ActivityIndicator size="large" color="red" />
+          </View>
+          :
+          <SafeAreaView style={{
+
+          }}>
+            <SectionList
+              sections={constactosfilter}
+              keyExtractor={(item, index) => item + index}
+              renderItem={({ item }) => (
+                <View
+                  style={{ flexDirection:'row',
+                  backgroundColor: 'white',
+                  margin: 10,
+                  borderRadius: 13,
+                  borderWidth: 1,
+                  borderColor: '#EAEDED',
+                  padding: 10,
+                  alignItems: 'center' }}
+                >
+                  <Text style={{
+                    marginHorizontal: 8,
+                    padding: 16,
+                    backgroundColor: '#CAF0FF',
+                    color:'#68C6E5',
+                    borderRadius:14
+                  }}>{item.name.charAt(0).toUpperCase()} {item.lastName.charAt(0).toUpperCase()}</Text>
+                  <View
+                    style={{ width: '70%', paddingLeft: 8 }}
+                  >
+                    <Text style={{ color: 'black' }}>{item.name} {item.lastName}</Text>
+                    <Text style={{ color: 'black' }}>{item.phone}</Text>
+                  </View>
+
+                </View>
+              )}
+              
+            />
+
+          </SafeAreaView>
+
+      }
+      
+      <Text
+      style={{
+        color:'#AAAAAA',
+        padding:10,
+        fontSize:18
+      }}
+      >All</Text>
       {
         constactos == undefined
           ? <View
@@ -152,14 +218,20 @@ const Contacts = ({ navigation }) => {
             <ActivityIndicator size="large" color="red" />
           </View>
           :
-
           <SafeAreaView style={styles.container}>
             <SectionList
               sections={constactos}
               keyExtractor={(item, index) => item + index}
               renderItem={({ item }) => (
                 <View
-                  style={{ flexDirection: 'row', padding: 15 }}
+                  style={{flexDirection:'row',
+                  backgroundColor: 'white',
+                  margin: 10,
+                  borderRadius: 13,
+                  borderWidth: 1,
+                  borderColor: '#EAEDED',
+                  padding: 10,
+                  alignItems: 'center' }}
                 >
                   <Text style={{
                     marginHorizontal: 8,
