@@ -6,7 +6,9 @@ import {
     ActivityIndicator,
     ScrollView,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    StyleSheet,
+    SectionList,
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import {
@@ -49,6 +51,24 @@ const Home = () => {
             (res) => {
                 console.log('transacciones ok', JSON.stringify(res.data.data, null, 4))
                 setTransacciones(res.data.data)
+
+                // const transformedData = res.data.data.reduce((result, item) => {
+                //     const firstLetter = item.title.charAt(0).toUpperCase();
+                //     if (!result[firstLetter]) {
+                //         result[firstLetter] = {
+                //             title: firstLetter,
+                //             data: []
+                //         };
+                //     }
+                //     result[firstLetter].data.push(item);
+                //     return result;
+                // }, {});
+
+                // const sections = Object.values(transformedData);
+                // setTransacciones(sections)
+                // console.log('datos : ', JSON.stringify(sections, null, 4))
+
+
             }
         ).catch(
             (error) => {
@@ -340,81 +360,79 @@ const Home = () => {
                         </Paragraph>
                     </TouchableOpacity>
                 </View>
-                <Divider style={{ marginTop: 10, marginBottom: 10 }} />
-                <Text
-                    style={{
-                        fontSize: 22,
-                        padding: 10,
-                        color: 'black',
-                        fontFamily: 'bold',
-                        marginTop: 5
-
-                    }}
-                >Útltimas Transacciones</Text>
-
-
-                {
-                    transacciones == undefined
-                        ? (
-                            <View
-                                style={{
-                                    flex: 1,
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    backgroundColor: 'white',
-                                }}>
-                                <ActivityIndicator size="large" color="red" />
-                            </View>
-                        )
-                        : (
-                            <View>
-                                <ScrollView>
-                                    {transacciones.map((item, id) => (
-
-                                        <View
-                                            key={id}
-                                            style={{
-                                                flexDirection: 'row',
-                                                padding: 15
-                                            }}
-                                        ><Ionicons
-                                                name="wallet"
-                                                color="#74CC9B"
-                                                size={22}
-                                                style={{
-                                                    marginHorizontal: 8,
-                                                    padding: 16,
-                                                    backgroundColor: '#E4FFF0'
-                                                }}
-                                                onPress={() => console.log('hola icon')}
-                                            />
-                                            <View style={{ width: '60%', paddingLeft: 8 }}>
-                                                <Text
-                                                    style={{
-                                                        color: 'black',
-                                                        fontSize: 18,
-                                                        fontFamily: 'bold',
-                                                        alignSelf: 'flex-start',
-                                                        padding: 3,
-                                                    }}
-                                                >{item.title}</Text>
-                                                <Text
-                                                    style={{
-                                                        color: 'grey',
-                                                        fontSize: 12,
-                                                        fontFamily: 'bold',
-                                                        alignSelf: 'flex-start',
-                                                        padding: 3,
-                                                    }}
-                                                >{item.transactionType}</Text>
-                                            </View>
-                                            <Text>$ {item.amount}</Text>
-                                        </View>
-                                    ))}
-                                </ScrollView>
-                            </View>)
-                }
             </View>
+            <Divider style={{ marginTop: 10, marginBottom: 10 }} />
+            <Text
+                style={{
+                    fontSize: 22,
+                    padding: 10,
+                    color: 'black',
+                    fontFamily: 'bold',
+                    marginTop: 5
+
+                }}
+            >Útltimas Transacciones</Text>
+
+            {
+                transacciones == undefined
+                    ? <View
+                        style={{
+                            flex: 0.3,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            backgroundColor: 'white',
+                        }}>
+                        <ActivityIndicator size="large" color="red" />
+                    </View>
+                    : <SafeAreaView>
+
+                        <ScrollView>
+                            {transacciones.map((item, id) => (
+
+                                <View
+                                    key={id}
+                                    style={{
+                                        flexDirection: 'row',
+                                        padding: 15
+                                    }}
+                                ><Ionicons
+                                        name={(item.transactionType == 'SUS') ? 'swap-vertical' : (item.transactionType == 'CASH_IN' ? 'arrow-down' : 'arrow-up')}
+                                        color={(item.transactionType == 'SUS') ? '#B946FF' : (item.transactionType == 'CASH_IN' ? '#74CC9B' : '#EF9C55')}
+                                        size={22}
+                                        style={{
+                                            marginHorizontal: 8,
+                                            padding: 16,
+                                            backgroundColor: `${(item.transactionType == 'SUS') ? '#F3E4FF' : (item.transactionType == 'CASH_IN' ? '#E4FFF0' : '#FEEAD4')}`
+                                        }}
+                                        onPress={() => console.log('hola icon')}
+                                    />
+                                    <View style={{ width: '60%', paddingLeft: 8 }}>
+                                        <Text
+                                            style={{
+                                                color: 'black',
+                                                fontSize: 18,
+                                                fontFamily: 'bold',
+                                                alignSelf: 'flex-start',
+                                                padding: 3,
+                                            }}
+                                        >{item.title}</Text>
+                                        <Text
+                                            style={{
+                                                color: 'grey',
+                                                fontSize: 12,
+                                                fontFamily: 'bold',
+                                                alignSelf: 'flex-start',
+                                                padding: 3,
+                                            }}
+                                        >{item.transactionType}</Text>
+                                    </View>
+                                    <Text>$ {item.amount}</Text>
+                                </View>
+                            ))}
+                        </ScrollView>
+
+                    </SafeAreaView>
+            }
         </View>
     )
 }
