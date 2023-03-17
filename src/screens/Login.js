@@ -79,12 +79,12 @@ const Login = ({ navigation }) => {
                         fontWeight: 'bold',
                     }}
 
-                >Comienza a menjar tu vida financiera</Text>
+                >Comienza a manejar tu vida financiera</Text>
             </View>
 
             <View style={styles.containerinputs}>
                 <Text style={{
-                    color: 'black',
+                    color: '#334154',
                     fontWeight: 'bold',
 
                 }}>Email</Text>
@@ -97,7 +97,7 @@ const Login = ({ navigation }) => {
                 />
                 <Text
                     style={{
-                        color: 'black',
+                        color: '#334154',
                         fontWeight: 'bold',
 
                     }}
