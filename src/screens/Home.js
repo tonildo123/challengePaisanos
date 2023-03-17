@@ -49,24 +49,24 @@ const Home = () => {
 
         ).then(
             (res) => {
-                console.log('transacciones ok', JSON.stringify(res.data.data, null, 4))
-                setTransacciones(res.data.data)
+                console.log('transacciones home 2', JSON.stringify(res.data.data, null, 4))
+                // setTransacciones(res.data.data)
 
-                // const transformedData = res.data.data.reduce((result, item) => {
-                //     const firstLetter = item.title.charAt(0).toUpperCase();
-                //     if (!result[firstLetter]) {
-                //         result[firstLetter] = {
-                //             title: firstLetter,
-                //             data: []
-                //         };
-                //     }
-                //     result[firstLetter].data.push(item);
-                //     return result;
-                // }, {});
+                const transformedData = res.data.data.reduce((result, item) => {
+                    const firstLetter = item.title.charAt(0).toUpperCase();
+                    if (!result[firstLetter]) {
+                        result[firstLetter] = {
+                            title: firstLetter,
+                            data: []
+                        };
+                    }
+                    result[firstLetter].data.push(item);
+                    return result;
+                }, {});
 
-                // const sections = Object.values(transformedData);
-                // setTransacciones(sections)
-                // console.log('datos : ', JSON.stringify(sections, null, 4))
+                const sections = Object.values(transformedData);
+                setTransacciones(sections)
+                console.log('transacciones section : ', JSON.stringify(sections, null, 4))
 
 
             }
@@ -97,8 +97,8 @@ const Home = () => {
     }
 
     return (
-        <View>
-            <View style={{ backgroundColor: 'white' }}>{/**View de el header */}
+        <View style={{ flex: 1, }}>
+            <View style={{ backgroundColor: 'white' }}>
                 <Appbar.Header
                     style={{
                         backgroundColor: 'white',
@@ -121,7 +121,7 @@ const Home = () => {
                                     fontFamily: 'bold',
                                     fontWeight: 'bold'
                                 }}
-                            >{state.logger.user.name}</Text>
+                            >{state.logger.user.name.replace("Soy ", "")}</Text>
                         </View>
                         <View
                             style={{
@@ -152,6 +152,7 @@ const Home = () => {
                 </Appbar.Header>
                 <StatusBar backgroundColor="#000000" barStyle="light-content" />
             </View>
+
             {cuentas == undefined ? (
                 <View
                     style={{
@@ -259,109 +260,107 @@ const Home = () => {
                     </ScrollView>
                 </SafeAreaView>
             }
-            {/* el body  */}
-            <View>
-                <Text
-                    style={{
-                        fontSize: 22,
-                        padding: 10,
-                        color: 'black',
-                        fontFamily: 'bold',
 
-                    }}
-                >Servicios</Text>
-                <View
+
+            <Text
+                style={{
+                    fontSize: 22,
+                    padding: 10,
+                    color: 'black',
+                    fontFamily: 'bold',
+
+                }}
+            >Servicios</Text>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
+                    alignItems: 'center'
+                }}>
+                <TouchableOpacity
                     style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-evenly',
+                        justifyContent: 'center',
                         alignItems: 'center'
-                    }}>
-                    <TouchableOpacity
+                    }}
+                >
+                    <Ionicons
+                        name="wallet"
+                        color="#74CC9B"
+                        size={22}
                         style={{
-                            justifyContent: 'center',
-                            alignItems: 'center'
+                            marginHorizontal: 8,
+                            padding: 16,
+                            backgroundColor: '#E4FFF0'
                         }}
-                    >
-                        <Ionicons
-                            name="wallet"
-                            color="#74CC9B"
-                            size={22}
-                            style={{
-                                marginHorizontal: 8,
-                                padding: 16,
-                                backgroundColor: '#E4FFF0'
-                            }}
-                            onPress={() => console.log('hola icon')}
-                        />
-                        <Paragraph >
-                            Billetera
-                        </Paragraph>
-                    </TouchableOpacity>
-                    <TouchableOpacity
+                        onPress={() => console.log('hola icon')}
+                    />
+                    <Paragraph >
+                        Billetera
+                    </Paragraph>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <Ionicons
+                        name="swap-vertical"
+                        color="#EF9C55"
+                        size={22}
                         style={{
-                            justifyContent: 'center',
-                            alignItems: 'center'
+                            marginHorizontal: 8,
+                            padding: 16,
+                            backgroundColor: '#FEEAD4'
                         }}
-                    >
-                        <Ionicons
-                            name="swap-vertical"
-                            color="#EF9C55"
-                            size={22}
-                            style={{
-                                marginHorizontal: 8,
-                                padding: 16,
-                                backgroundColor: '#FEEAD4'
-                            }}
-                            onPress={() => console.log('hola icon')}
-                        />
-                        <Paragraph >
-                            Transferir
-                        </Paragraph></TouchableOpacity>
-                    <TouchableOpacity
-                        style={{
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}
-                    >
+                        onPress={() => console.log('hola icon')}
+                    />
+                    <Paragraph >
+                        Transferir
+                    </Paragraph></TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
 
-                        <Ionicons
-                            name="document-text"
-                            color="#B946FF"
-                            size={22}
-                            style={{
-                                marginHorizontal: 8,
-                                padding: 16,
-                                backgroundColor: '#EEE3FF'
-                            }}
-                            onPress={() => console.log('hola icon')}
-                        />
-                        <Paragraph >
-                            Pagar
-                        </Paragraph></TouchableOpacity>
-                    <TouchableOpacity
+                    <Ionicons
+                        name="document-text"
+                        color="#B946FF"
+                        size={22}
                         style={{
-                            justifyContent: 'center',
-                            alignItems: 'center'
+                            marginHorizontal: 8,
+                            padding: 16,
+                            backgroundColor: '#EEE3FF'
                         }}
-                    >
-                        <MaterialCommunityIcons
-                            name="cellphone-arrow-down"
-                            color="#68C6E5"
-                            size={22}
-                            style={{
-                                marginHorizontal: 8,
-                                padding: 16,
-                                backgroundColor: '#CAF0FF'
-                            }}
-                            onPress={() => console.log('hola icon')}
-                        />
-                        <Paragraph >
-                            Recargar
-                        </Paragraph>
-                    </TouchableOpacity>
-                </View>
+                        onPress={() => console.log('hola icon')}
+                    />
+                    <Paragraph >
+                        Pagar
+                    </Paragraph></TouchableOpacity>
+                <TouchableOpacity
+                    style={{
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                >
+                    <MaterialCommunityIcons
+                        name="cellphone-arrow-down"
+                        color="#68C6E5"
+                        size={22}
+                        style={{
+                            marginHorizontal: 8,
+                            padding: 16,
+                            backgroundColor: '#CAF0FF'
+                        }}
+                        onPress={() => console.log('hola icon')}
+                    />
+                    <Paragraph >
+                        Recargar
+                    </Paragraph>
+                </TouchableOpacity>
             </View>
-            <Divider style={{ marginTop: 10, marginBottom: 10 }} />
             <Text
                 style={{
                     fontSize: 22,
@@ -384,18 +383,19 @@ const Home = () => {
                         }}>
                         <ActivityIndicator size="large" color="red" />
                     </View>
-                    : <SafeAreaView>
-
-                        <ScrollView>
-                            {transacciones.map((item, id) => (
-
+                    :
+                    <SafeAreaView
+                    style={{flex:1}}>
+                        <SectionList
+                            sections={transacciones}
+                            keyExtractor={(item, index) => item + index}
+                            renderItem={({ item }) => (
                                 <View
-                                    key={id}
                                     style={{
-                                        flexDirection: 'row',
-                                        padding: 15
+                                        flexDirection: 'row', padding: 15
                                     }}
-                                ><Ionicons
+                                >
+                                    <Ionicons
                                         name={(item.transactionType == 'SUS') ? 'swap-vertical' : (item.transactionType == 'CASH_IN' ? 'arrow-down' : 'arrow-up')}
                                         color={(item.transactionType == 'SUS') ? '#B946FF' : (item.transactionType == 'CASH_IN' ? '#74CC9B' : '#EF9C55')}
                                         size={22}
@@ -406,7 +406,9 @@ const Home = () => {
                                         }}
                                         onPress={() => console.log('hola icon')}
                                     />
-                                    <View style={{ width: '60%', paddingLeft: 8 }}>
+                                    <View
+                                        style={{ width: '60%', paddingLeft: 8 }}
+                                    >
                                         <Text
                                             style={{
                                                 color: 'black',
@@ -428,11 +430,11 @@ const Home = () => {
                                     </View>
                                     <Text>$ {item.amount}</Text>
                                 </View>
-                            ))}
-                        </ScrollView>
-
+                            )}
+                        />
                     </SafeAreaView>
             }
+
         </View>
     )
 }

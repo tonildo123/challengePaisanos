@@ -91,6 +91,7 @@ const Login = ({ navigation }) => {
                 <TextInput
                     style={styles.input}
                     placeholder="Ingrese su email"
+                    placeholderTextColor="grey"
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                 />
@@ -104,6 +105,7 @@ const Login = ({ navigation }) => {
                 <TextInput
                     style={styles.input}
                     placeholder="Ingrese su contraseña"
+                    placeholderTextColor="grey"
                     secureTextEntry={true}
                     onChangeText={(text) => setPassword(text)}
                     value={password}
@@ -187,7 +189,8 @@ const styles = StyleSheet.create({
         padding: 10,
         marginVertical: 10,
         width: '95%',
-        fontSize: 16
+        fontSize: 16,
+        color:'black'
     },
     button: {
         backgroundColor: '#005CEE',

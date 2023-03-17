@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home';
 import Contacts from '../screens/Contacts';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Octicons from 'react-native-vector-icons/Octicons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useDispatch } from 'react-redux';
 import { unlogger } from '../store/redux/reduxLogin/LoginSlice';
+import Home from '../screens/Home';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -17,6 +18,7 @@ export const BottonTab = () => {
     return (
 
         <Tab.Navigator screenOptions={{ headerShown: false }}>
+            
             <Tab.Screen
                 name="Home"
                 component={Home}
@@ -73,6 +75,7 @@ export const BottonTab = () => {
                         />
                     ),
                 }} />
+                
         </Tab.Navigator>
 
     );
