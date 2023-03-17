@@ -1,16 +1,8 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
 import axios from 'axios';
 
-// import { onGetStorageToken, onDeleteStorage } from '../utils/AsyncStorage';
 import { Alert } from 'react-native';
 import { Enviroment } from '../enviroment/Enviroment';
-import { onGetStorageToken } from '../store/StorageKey';
-
-// import { AuthContext } from '../../components/context';
-
-// Create axios client, pre-configured with baseURL
-
 
 const Api = axios.create({
     baseURL: `${Enviroment.BASE_URL}`,
