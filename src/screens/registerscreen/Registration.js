@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import { Enviroment } from '../../enviroment/Enviroment';
 import { styleRegister } from './StyleRegister';
 
@@ -19,7 +19,7 @@ const Registration = () => {
         .catch((err) => { Alert.alert('Error')})
 
     }
-    
+
     const handleChangeEmail = (value) => {setEmail(value)}
     const handleChangePass = (value) => {setPassword(value)}
     const handleChangeNombre = (value) => {setNombre(value)}
