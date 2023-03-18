@@ -54,7 +54,4 @@ const Registration = () => {
         </View>
     );
 }
-
-
-
 export default Registration;
