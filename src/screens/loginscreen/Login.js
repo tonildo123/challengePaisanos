@@ -6,10 +6,10 @@ import useHandleLogin from '../../hooks/useHandleLogin';
 
 const Login = () => {
 
-    const {handleRegister, handleLogin} = useHandleLogin()    
+    const { handleRegister, handleLogin } = useHandleLogin()
     const [email, setEmail] = useState('soypaisanx@paisanos.io');
     const [password, setPassword] = useState('PAISANX2023!$');
-    const [toggleCheckBox, setToggleCheckBox] = useState(true)    
+    const [toggleCheckBox, setToggleCheckBox] = useState(true)
 
     return (
         <View style={StyleLogin.container}>

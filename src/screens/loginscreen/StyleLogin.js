@@ -55,32 +55,32 @@ export const StyleLogin = StyleSheet.create({
         fontSize: 18
 
     },
-    styleImgen:{        
+    styleImgen: {
         height: 100,
         width: 134,
         resizeMode: 'stretch',
     },
-    textBody:{
+    textBody: {
         alignContent: 'center',
         alignItems: 'center',
         marginTop: 20,
         color: '#717E95',
         fontWeight: 'bold',
     },
-    textSubtitle:{
+    textSubtitle: {
         color: '#334154',
         fontWeight: 'bold',
     },
-    styleCheckbox:{
+    styleCheckbox: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center'
     },
-    styleRegister:{
+    styleRegister: {
         flexDirection: 'row',
         padding: 25,
     },
-    txtQuestion :{
+    txtQuestion: {
         color: '#616E7C',
         fontSize: 18
     },

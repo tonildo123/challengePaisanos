@@ -19,7 +19,7 @@ import {
   Appbar,
   Divider
 } from 'react-native-paper';
-import { Enviroment } from '../enviroment/Enviroment';
+import { Enviroment } from '../../enviroment/Enviroment';
 
 const Contacts = ({ navigation }) => {
 
@@ -57,11 +57,11 @@ const Contacts = ({ navigation }) => {
         const sections = Object.values(transformedData);
         setconstactos(sections)
         console.log('datos : ', JSON.stringify(sections, null, 4))
-        
+
         const filteredArray = sections.slice(0, 2).filter((item, index) => {
           return index < 2;
         });
-        
+
         console.log(JSON.stringify(filteredArray, null, 4));
 
         setconstactosfilter(filteredArray)
@@ -110,18 +110,18 @@ const Contacts = ({ navigation }) => {
         </Appbar.Header>
         <StatusBar backgroundColor="#000000" barStyle="light-content" />
       </View>
-       <View
-       style={{
-        flexDirection:'row',
-        backgroundColor: 'white',
-        margin: 10,
-        borderRadius: 13,
-        borderWidth: 1,
-        borderColor: '#EAEDED',
-        padding: 10,
-        alignItems: 'center'
-      }}
-       >
+      <View
+        style={{
+          flexDirection: 'row',
+          backgroundColor: 'white',
+          margin: 10,
+          borderRadius: 13,
+          borderWidth: 1,
+          borderColor: '#EAEDED',
+          padding: 10,
+          alignItems: 'center'
+        }}
+      >
         <AntDesign
           name="search1"
           color="#AAAAAA"
@@ -132,22 +132,22 @@ const Contacts = ({ navigation }) => {
           onPress={() => { console.log('buscar') }}
         />
 
-       <TextInput
-        placeholder="Ingrese un nombre o un numero"
-        placeholderTextColor="#AAAAAA"
+        <TextInput
+          placeholder="Ingrese un nombre o un numero"
+          placeholderTextColor="#AAAAAA"
         >
-        
-      </TextInput>
-        </View>       
-      
+
+        </TextInput>
+      </View>
+
       <Text
-      style={{
-        color:'#AAAAAA',
-        padding:10,
-        fontSize:18
-      }}
+        style={{
+          color: '#AAAAAA',
+          padding: 10,
+          fontSize: 18
+        }}
       >Recents</Text>
-       {
+      {
         constactosfilter == undefined
           ? <View
             style={{
@@ -167,21 +167,23 @@ const Contacts = ({ navigation }) => {
               keyExtractor={(item, index) => item + index}
               renderItem={({ item }) => (
                 <View
-                  style={{ flexDirection:'row',
-                  backgroundColor: 'white',
-                  margin: 10,
-                  borderRadius: 13,
-                  borderWidth: 1,
-                  borderColor: '#EAEDED',
-                  padding: 10,
-                  alignItems: 'center' }}
+                  style={{
+                    flexDirection: 'row',
+                    backgroundColor: 'white',
+                    margin: 10,
+                    borderRadius: 13,
+                    borderWidth: 1,
+                    borderColor: '#EAEDED',
+                    padding: 10,
+                    alignItems: 'center'
+                  }}
                 >
                   <Text style={{
                     marginHorizontal: 8,
                     padding: 16,
                     backgroundColor: '#CAF0FF',
-                    color:'#68C6E5',
-                    borderRadius:14
+                    color: '#68C6E5',
+                    borderRadius: 14
                   }}>{item.name.charAt(0).toUpperCase()} {item.lastName.charAt(0).toUpperCase()}</Text>
                   <View
                     style={{ width: '70%', paddingLeft: 8 }}
@@ -192,19 +194,19 @@ const Contacts = ({ navigation }) => {
 
                 </View>
               )}
-              
+
             />
 
           </SafeAreaView>
 
       }
-      
+
       <Text
-      style={{
-        color:'#AAAAAA',
-        padding:10,
-        fontSize:18
-      }}
+        style={{
+          color: '#AAAAAA',
+          padding: 10,
+          fontSize: 18
+        }}
       >All</Text>
       {
         constactos == undefined
@@ -224,21 +226,23 @@ const Contacts = ({ navigation }) => {
               keyExtractor={(item, index) => item + index}
               renderItem={({ item }) => (
                 <View
-                  style={{flexDirection:'row',
-                  backgroundColor: 'white',
-                  margin: 10,
-                  borderRadius: 13,
-                  borderWidth: 1,
-                  borderColor: '#EAEDED',
-                  padding: 10,
-                  alignItems: 'center' }}
+                  style={{
+                    flexDirection: 'row',
+                    backgroundColor: 'white',
+                    margin: 10,
+                    borderRadius: 13,
+                    borderWidth: 1,
+                    borderColor: '#EAEDED',
+                    padding: 10,
+                    alignItems: 'center'
+                  }}
                 >
                   <Text style={{
                     marginHorizontal: 8,
                     padding: 16,
                     backgroundColor: '#CAF0FF',
-                    color:'#68C6E5',
-                    borderRadius:14
+                    color: '#68C6E5',
+                    borderRadius: 14
                   }}>{item.name.charAt(0).toUpperCase()} {item.lastName.charAt(0).toUpperCase()}</Text>
                   <View
                     style={{ width: '70%', paddingLeft: 8 }}
@@ -249,9 +253,9 @@ const Contacts = ({ navigation }) => {
 
                 </View>
               )}
-              // renderSectionHeader={({ section: { title } }) => (
-              //   <Text style={{ color: 'black' }}>{title}</Text>
-              // )} esto mostraba la letra de los contactos
+            // renderSectionHeader={({ section: { title } }) => (
+            //   <Text style={{ color: 'black' }}>{title}</Text>
+            // )} esto mostraba la letra de los contactos
             />
 
           </SafeAreaView>

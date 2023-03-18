@@ -7,7 +7,7 @@ import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const useHandleLogin = () => {
-  
+
   const navigation = useNavigation();
   const distpach = useDispatch()
   const [email, setEmail] = useState('soypaisanx@paisanos.io');
@@ -15,18 +15,18 @@ const useHandleLogin = () => {
 
   const handleLogin = async () => {
 
-      axios.post(
-          `${Enviroment.BASE_URL}/${Enviroment.api_login}`,
-          { email: email, password: password},
-          { headers: { 'x-api-key': `${Enviroment.key}` },})
-          .then((res) => {             
+    axios.post(
+      `${Enviroment.BASE_URL}/${Enviroment.api_login}`,
+      { email: email, password: password },
+      { headers: { 'x-api-key': `${Enviroment.key}` }, })
+      .then((res) => {
 
-              if (res.data.success = true) {                  
-                  let obj = { name: res.data.data.name,}
-                  distpach(loggearme(obj))
-              }
-          }
-      ).catch((error) => {Alert.alert('Error al loggearse')}
+        if (res.data.success = true) {
+          let obj = { name: res.data.data.name, }
+          distpach(loggearme(obj))
+        }
+      }
+      ).catch((error) => { Alert.alert('Error al loggearse') }
       )
   }
   const handleRegister = () => {
@@ -35,8 +35,8 @@ const useHandleLogin = () => {
 
 
   return {
-   handleLogin,
-   handleRegister
+    handleLogin,
+    handleRegister
   }
 
 }

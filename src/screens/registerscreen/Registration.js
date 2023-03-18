@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { Enviroment } from '../enviroment/Enviroment';
+import { Enviroment } from '../../enviroment/Enviroment';
 
 
 const Registration = () => {
@@ -45,7 +45,7 @@ const Registration = () => {
     return (
         <View style={styles.container}>
             <Image
-                source={require('../assets/logo.png')}
+                source={require('../../assets/logo.png')}
                 style={{
                     height: 100,
                     width: 134,
