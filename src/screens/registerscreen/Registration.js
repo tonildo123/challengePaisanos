@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import { Enviroment } from '../../enviroment/Enviroment';
 import { styleRegister } from './StyleRegister';
 
@@ -13,30 +13,16 @@ const Registration = () => {
 
     const handleFormSubmit = () => {
 
-        axios.post(`${Enviroment.BASE_URL}/${Enviroment.api_auth}`, {
-            "name": nombre,
-            "email": email
-        }).then((resp) => {
-            console.log('respuesta ', JSON.stringify(resp.data, null, 3))
-
-        }).catch((err) => {
-            console.log(err)
-        })
+        axios.post(`${Enviroment.BASE_URL}/${Enviroment.api_auth}`,
+        { "name": nombre, "email": email})
+        .then((resp) => { Alert.alert('registrado!')})
+        .catch((err) => { Alert.alert('Error')})
 
     }
-
-    const handleChangeEmail = (value) => {
-        setEmail(value)
-    }
-
-    const handleChangePass = (value) => {
-        setPassword(value)
-    }
-
-    const handleChangeNombre = (value) => {
-        setNombre(value)
-    }
-
+    
+    const handleChangeEmail = (value) => {setEmail(value)}
+    const handleChangePass = (value) => {setPassword(value)}
+    const handleChangeNombre = (value) => {setNombre(value)}
 
     return (
         <View style={styleRegister.container}>
