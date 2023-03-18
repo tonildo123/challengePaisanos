@@ -1,7 +1,5 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
-import { Enviroment } from '../../enviroment/Enviroment';
 import useHandleRegister from '../../hooks/useHandleRegister';
 import { styleRegister } from './StyleRegister';
 
