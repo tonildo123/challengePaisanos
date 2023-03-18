@@ -2,23 +2,19 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import { Enviroment } from '../../enviroment/Enviroment';
+import useHandleRegister from '../../hooks/useHandleRegister';
 import { styleRegister } from './StyleRegister';
 
 
 const Registration = () => {
 
+    const {handleFormSubmit} = useHandleRegister();
+
     const [email, setEmail] = useState('soypaisanx@paisanos.io')
     const [password, setPassword] = useState('PAISANX2023!$')
     const [nombre, setNombre] = useState('')
 
-    const handleFormSubmit = () => {
-
-        axios.post(`${Enviroment.BASE_URL}/${Enviroment.api_auth}`,
-        { "name": nombre, "email": email})
-        .then((resp) => { Alert.alert('registrado!')})
-        .catch((err) => { Alert.alert('Error')})
-
-    }
+    const handleRegister = () => { handleFormSubmit(nombre, email)}
 
     const handleChangeEmail = (value) => {setEmail(value)}
     const handleChangePass = (value) => {setPassword(value)}
@@ -53,7 +49,7 @@ const Registration = () => {
             />
             <TouchableOpacity
                 style={styleRegister.button}
-                onPress={handleFormSubmit}
+                onPress={handleRegister}
             >
                 <Text style={styleRegister.buttonText}>Registrarse</Text>
             </TouchableOpacity>
